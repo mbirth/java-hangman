@@ -12,6 +12,9 @@ public class hangman extends Frame
     int maxdat=0;
     String words[];
     String myword=null;
+    char probed[]; // "-----------------------------";
+    char alphab[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T',
+		    'U','V','W','X','Y','Z','Ä','Ö','Ü'};
     int mistakes=0;
     KL CONTROL;
     char c;
@@ -41,6 +44,10 @@ public class hangman extends Frame
 	}
 	CONTROL=new KL();
 	addKeyListener(CONTROL);
+	probed=new char[29];
+	for (int i=1;i<29;i++) {
+	    probed[i]='-';
+	}
     }
 
     public void paint(Graphics g)
@@ -51,6 +58,7 @@ public class hangman extends Frame
 	g.drawString("Datensaetze: "+maxdat,40,350);
 	g.drawString("Wort: "+myword,40,220);
 	g.drawString("Zeichen: "+c,40,230);
+	g.drawString("alpha: "+new String(probed),40,250);
     }
     
 
@@ -61,6 +69,12 @@ public class hangman extends Frame
 	public void keyTyped(KeyEvent e)
 	{
 	    c=e.getKeyChar();
+	    int i;
+	    for (i=0;i<29;i++) {
+		if (c==alphab[i]) {
+		    probed[i]=c;
+		}
+	    }
 	    repaint();
 	}
     }
@@ -72,7 +86,6 @@ public class hangman extends Frame
 	{
 	    public void windowClosing(WindowEvent e)
 	    {
-		removeKeyListener(CONTROL);
 		System.exit(0);
 	    }
 	});
