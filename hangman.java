@@ -1,8 +1,24 @@
+/*
+HANGMAN FOR JAVA
+(c)1998/99 by Markus Birth <Robo.Cop(a)gmx.net>
+
+This is the first program I wrote in Java. Thanks to
+Mr. Fröbel for making me learning Java so quick (We had to
+finish our projects for the computer science lessons.)
+
+Things used for the making of this:
+-Xemacs with its Revision Control System
+-hangman.java from Carlos von Hoyningen-Huene
+-some bottles of PEPSI Coke
+-hints & tips from Carlos von Hoyningen-Huene
+*/
+
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.math.*;
-import java.io.*;                  // für Dateioperationen ("Tupfer, Schere ...")
+import java.lang.Character.*;
+import java.math.*;    // eigentlich nur für die eine Zufallszahl
+import java.io.*;      // für Dateioperationen ("Tupfer, Schere ...")
 
 public class hangman extends Frame
 {
@@ -12,9 +28,10 @@ public class hangman extends Frame
     int maxdat=0;
     String words[];
     String myword=null;
-    char probed[]; // "-----------------------------";
-    char alphab[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T',
-		    'U','V','W','X','Y','Z','Ä','Ö','Ü'};
+    char probed[];
+    char alphab[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
+                    'O','P','Q','R','S','T','U','V','W','X','Y','Z',
+		    'Ä','Ö','Ü'};
     int mistakes=0;
     KL CONTROL;
     char c;
@@ -69,6 +86,7 @@ public class hangman extends Frame
 	public void keyTyped(KeyEvent e)
 	{
 	    c=e.getKeyChar();
+	    c=java.lang.Character.toUpperCase(c);
 	    int i;
 	    for (i=0;i<29;i++) {
 		if (c==alphab[i]) {
@@ -89,7 +107,7 @@ public class hangman extends Frame
 		System.exit(0);
 	    }
 	});
-	frame.setTitle("HangMan for Java - © 1998 by Markus Birth");
+	frame.setTitle("HangMan for Java - \u00a91998 by Markus Birth");
 	frame.setSize(WND_B, WND_H);
 	frame.show();
     }
