@@ -20,10 +20,10 @@ import java.lang.Character.*;
 import java.math.*;    // eigentlich nur für die eine Zufallszahl
 import java.io.*;      // für Dateioperationen ("Tupfer, Schere ...")
 
-public class hangman extends Frame
-{
+public class hangman extends Frame {
     // Globale Variablen
     final static int WND_B=400, WND_H=400;
+    final int SX=50, SY=50;
     RandomAccessFile file;
     int maxdat=0;
     String words[];
@@ -37,11 +37,9 @@ public class hangman extends Frame
     KL CONTROL;
     char c;
 
-    public hangman()
-    {
+    public hangman() {
 	String stmp=new String();
-	try
-	{
+	try {
 	    RandomAccessFile f=new RandomAccessFile("hangman.dat","r");
 	    words=new String[50];
 	    while ((stmp=f.readLine())!=null && maxdat<50) {
@@ -51,13 +49,11 @@ public class hangman extends Frame
 		}
 	    }
 	    f.close();
-	    while (myword==null)
-	    {
+	    while (myword==null) {
 		myword=words[(int)(Math.random()*maxdat)+1];
 	    }
 	}
-	catch(IOException ioe)
-	{
+	catch(IOException ioe) {
 	    System.out.println("IOException: "+ioe.toString());
 	}
 	CONTROL=new KL();
@@ -72,73 +68,110 @@ public class hangman extends Frame
 	}
     }
 
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
 	g.setColor(Color.black);
 	g.fillRect(0,0,WND_B,WND_H);
-	g.setColor(Color.yellow);
 	// g.drawString("Datensaetze: "+maxdat,40,350);
 	// g.drawString("Wort: "+myword,40,200);
 	// g.drawString("Zeichen: "+c,40,230);
-	g.drawString("Wort: "+new String(xyword),40,215);
-	g.drawString("alpha: "+new String(probed),40,260);
-	g.drawString("mist: "+mistakes,40,230);
+	if (mistakes!=6 && mistakes!=-1) {
+	    g.setColor(Color.yellow);
+	    g.drawString("Wort: "+new String(xyword),40,215);
+	    g.drawString("alpha: "+new String(probed),40,260);
+	    g.drawString("mist: "+mistakes,40,230);
+	}
+	UpdateHangMan(g);
     }
     
+    public void UpdateHangMan(Graphics g) {
+	Toolkit tk=Toolkit.getDefaultToolkit();
 
-    class KL implements KeyListener
-    {
-		public void keyPressed(KeyEvent e) {}
-		public void keyReleased(KeyEvent e) {}
-		public void keyTyped(KeyEvent e)
-		{
-	    	c=e.getKeyChar();
-		    c=Character.toUpperCase(c);
-		    int i;
-		    boolean status=false;
-		    boolean check=false;
-		    for (i=0;i<29;i++) {
-				if (c==alphab[i]) {
-			    	if (probed[i]!=c) probed[i]=c; else check=true;
-				}
-		    }
-		    int underscores=0;
-		    for (i=0;i<myword.length();i++) {
-				if (c==Character.toUpperCase(myword.charAt(i))) {
-			    	xyword[i]=myword.charAt(i);
-			    	status=true;
-				}
-				if (xyword[i]=='_') underscores++;
-		    }
-	   		if (!status && !check) { mistakes++; }
-		    if (underscores==0) {
-				myword="RICHTIG!";
-				repaint();
-				System.out.println("Sie haben gewonnen!");
-				System.exit(0);
-		    }
-		    if (mistakes>=6) {
-		    	myword="VERLOREN!";
-		    	repaint();
-		    	System.out.println("Schön, wie sie da am Galgen baumeln ...");
-		    	System.exit(0);
-		    }
-		    repaint();
-		}
+	switch(mistakes) {
+	case 6:
+	    g.drawImage(tk.getImage("images/hm6.gif"),SX,SY,this);
+	    g.setColor(Color.red);
+	    g.drawString(">>> VERLOREN <<<",WND_B/2-100,WND_H/2);
+	    g.setColor(Color.white);
+	    g.drawString("Das gesuchte Wort war '"+myword+"'!",WND_B/2-100,WND_H/2+15);
+	    removeKeyListener(CONTROL);
+	    break;
+	case 5:
+	    g.drawImage(tk.getImage("images/hm5.gif"),SX,SY,this);
+	    break;
+	case 4:
+	    g.drawImage(tk.getImage("images/hm4.gif"),SX,SY,this);
+	    break;
+	case 3:
+	    g.drawImage(tk.getImage("images/hm3.gif"),SX,SY,this);
+	    break;
+	case 2:
+	    g.drawImage(tk.getImage("images/hm2.gif"),SX,SY,this);
+	    break;
+	case 1:
+	    g.drawImage(tk.getImage("images/hm1.gif"),SX,SY,this);
+	    break;
+	case 0:
+	    g.drawImage(tk.getImage("images/hm0.gif"),SX,SY,this);
+	    break;
+	case -1:
+	    g.drawImage(tk.getImage("images/hm.gif"),SX,SY,this);
+	    g.setColor(Color.green);
+	    g.drawString(">>> GEWONNEN <<<",WND_B/2-100,WND_H/2);
+	    removeKeyListener(CONTROL);
+	    break;
+	}
+
     }
 
-    public static void main(String args[])
-    {
+    class KL implements KeyListener {
+	public void keyPressed(KeyEvent e) { }
+	public void keyReleased(KeyEvent e) { }
+	public void keyTyped(KeyEvent e) {
+	    c=e.getKeyChar();
+	    c=Character.toUpperCase(c);
+	    int i;
+	    boolean status=false;
+	    boolean check=false;
+	    for (i=0;i<29;i++) {
+		if (c==alphab[i]) {
+		    if (probed[i]!=c) probed[i]=c; else check=true;
+		}
+	    }
+	    int underscores=0;
+	    for (i=0;i<myword.length();i++) {
+		if (c==Character.toUpperCase(myword.charAt(i))) {
+		    xyword[i]=myword.charAt(i);
+		    status=true;
+		}
+		if (xyword[i]=='_') underscores++;
+	    }
+	    if (!status && !check) mistakes++;
+	    if (underscores==0) {
+		mistakes=-1;
+		System.out.println("Sie haben gewonnen!\n'"+myword+"' war richtig.");
+	    }
+	    if (mistakes>=6) {
+		mistakes=6;
+		System.out.println("Schön, wie sie da am Galgen baumeln ...\nWieso sind Sie auch nicht auf '"+myword+"' gekommen?");
+	    }
+	    repaint();
+	}
+    }
+
+    public static void main(String args[]) {
 	Frame frame=new hangman();
-	frame.addWindowListener(new WindowAdapter()
-	{
-	    public void windowClosing(WindowEvent e)
-	    {
+	frame.addWindowListener(new WindowAdapter() {
+	    public void windowClosing(WindowEvent e) {
 		System.exit(0);
 	    }
 	});
 	frame.setTitle("HangMan for Java - \u00a91998 by Markus Birth");
 	frame.setSize(WND_B, WND_H);
 	frame.show();
+	/* Pictures
+	   Image pic;
+	   pic=Toolkit.getDefaultToolkit().getImage("image.jpg");
+	   g.drawImage(pic,0,0,this);
+	*/
     }
 }
