@@ -28,9 +28,10 @@ public class hangman extends Frame {
     String myword=null;  // Wort: was es mal werden soll
     char xyword[];        // Wort: xy-ungelöst
     char probed[];
+    char notprobed[];
     char alphab[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
                     'O','P','Q','R','S','T','U','V','W','X','Y','Z',
-		    'Ä','Ö','Ü'};
+		    'Ä','Ö','Ü','ß'};
     int mistakes=0;  // Anzahl Fehler (MIST!-akes)
     int tries=0;     // Anzahl Versuche
     KL CONTROL;
@@ -47,6 +48,10 @@ public class hangman extends Frame {
 		if (stmp.charAt(0) != '#') {      // und da auch kein "#" am Anfang klebt ...
 		    wordcount++;                  // zähle es als Wort.
 		}
+	    }
+	    if (wordcount==0) {
+	    	System.out.println("ACHTUNG! In der Datendatei sind keine gültigen Wörter zu finden.");
+	    	System.exit(0);
 	    }
 	    System.out.println("Woerter in Datendatei: "+wordcount);  // Statusbericht
 	    while (wordseek==0) {    // Solange wordseek noch 0 ist, tue ...
@@ -68,6 +73,8 @@ public class hangman extends Frame {
 	}
 	catch(IOException ioe) {    // Falls doch mal ein Fehler auftreten sollte ...
 	    System.out.println("IOException: "+ioe.toString());  // Fehlermeldung und tschüß!
+	    System.out.println("\n\nFehler beim Bearbeiten der Datendatei. Stellen Sie sicher, daß die Datei HANGMAN.DAT auch existiert und lesbar ist.");
+	    System.exit(0);
 	}
 	CONTROL=new KL();   // neuer KeyListener: CONTROL
 	addKeyListener(CONTROL);  // hinzufügen
@@ -75,9 +82,11 @@ public class hangman extends Frame {
 	for (int i=0;i<myword.length();i++) {  // array initialisieren
 	    xyword[i]='_';
 	}
-	probed=new char[29];                // array erstellen
-	for (int i=0;i<29;i++) {            // array initialisieren
+	probed=new char[alphab.length];                // array erstellen
+	notprobed=new char[alphab.length];
+	for (int i=0;i<alphab.length;i++) {            // array initialisieren
 	    probed[i]='-';
+	    notprobed[i]=alphab[i];
 	}
     }
 
@@ -89,8 +98,14 @@ public class hangman extends Frame {
 	g.fillRect(0,0,WND_B,WND_H);       // Fenster schön SCHWARZ machen!
 	g.setColor(Color.yellow);          // und Farbe auf GELB setzen
 	g.drawString("Wort: "+new String(xyword),40,215);
-	if (mistakes!=-1) g.drawString("Buchstaben: "+new String(probed),40,260);
-	if (mistakes!=-1) g.drawString("Fehler: "+mistakes,40,230);
+	if (mistakes!=-1) {
+	    g.drawString("Buchstaben: ",40,260);
+	    for (int i=0;i<alphab.length;i++) {
+		g.drawChars(probed,i,1,118+i*8,260);
+		g.drawChars(notprobed,i,1,118+i*8,275);
+	    }
+	    g.drawString("Fehler: "+mistakes,40,230);
+	}
 	UpdateHangMan(g);    // Hangman updaten
     }
     
@@ -143,9 +158,10 @@ public class hangman extends Frame {
 	    int i;                        // Wir brauchen bald ein Iiiiihh
 	    boolean status=false;        // Booleans
 	    boolean check=false;         // für versch. Status-Werte
-	    for (i=0;i<29;i++) {
+	    for (i=0;i<alphab.length;i++) {
 		if (c==alphab[i]) {        // wenn c = einer der Buchst. des Alphabets ist ...
 		    if (probed[i]!=c) probed[i]=c; else check=true;  // und der auch noch nicht vorher getippt wurde, dann ... u.s.w.
+		    if (notprobed[i]==c) notprobed[i]='-';
 		}
 	    }
 	    int underscores=0;            // Integer für Anzahl der "_" im bisher gepuzzleten Wort
@@ -175,6 +191,7 @@ public class hangman extends Frame {
 	Frame frame=new hangman();       // neues Fenster
         frame.addWindowListener(new WindowAdapter() {   // WindowListener hinzufügen
 	    public void windowClosing(WindowEvent e) {  // wenn auf X geklickt:
+		System.out.println();
 		System.exit(0);       // Programm beenden.
 	    }
 	});
