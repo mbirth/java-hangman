@@ -28,6 +28,7 @@ public class hangman extends Frame
     int maxdat=0;
     String words[];
     String myword=null;
+    char xyword[];
     char probed[];
     char alphab[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
                     'O','P','Q','R','S','T','U','V','W','X','Y','Z',
@@ -61,6 +62,10 @@ public class hangman extends Frame
 	}
 	CONTROL=new KL();
 	addKeyListener(CONTROL);
+	xyword=new char[myword.length()];
+	for (int i=1;i<myword.length();i++) {
+	    xyword[i]='_';
+	}
 	probed=new char[29];
 	for (int i=1;i<29;i++) {
 	    probed[i]='-';
@@ -72,9 +77,10 @@ public class hangman extends Frame
 	g.setColor(Color.black);
 	g.fillRect(0,0,WND_B,WND_H);
 	g.setColor(Color.yellow);
-	g.drawString("Datensaetze: "+maxdat,40,350);
+	// g.drawString("Datensaetze: "+maxdat,40,350);
 	g.drawString("Wort: "+myword,40,220);
-	g.drawString("Zeichen: "+c,40,230);
+	// g.drawString("Zeichen: "+c,40,230);
+	g.drawString("Wort: "+new String(xyword),40,230);
 	g.drawString("alpha: "+new String(probed),40,250);
     }
     
@@ -91,6 +97,11 @@ public class hangman extends Frame
 	    for (i=0;i<29;i++) {
 		if (c==alphab[i]) {
 		    probed[i]=c;
+		}
+	    }
+	    for (i=0;i<myword.length();i++) {
+		if (c==java.lang.Character.toUpperCase(myword.charAt(i))) {
+		    xyword[i]=myword.charAt(i);
 		}
 	    }
 	    repaint();
