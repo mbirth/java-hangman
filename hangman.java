@@ -22,7 +22,7 @@ import java.io.*;      // für Dateioperationen ("Tupfer, Schere ...")
 
 public class hangman extends Frame {
     // Globale Variablen
-    final static int WND_B=400, WND_H=400;
+    final static int WND_B=400, WND_H=300;
     final int SX=50, SY=50;
     RandomAccessFile file;
     int maxdat=0;
@@ -69,17 +69,15 @@ public class hangman extends Frame {
     }
 
     public void paint(Graphics g) {
-	g.setColor(Color.black);
-	g.fillRect(0,0,WND_B,WND_H);
 	// g.drawString("Datensaetze: "+maxdat,40,350);
 	// g.drawString("Wort: "+myword,40,200);
 	// g.drawString("Zeichen: "+c,40,230);
-	if (mistakes!=6 && mistakes!=-1) {
-	    g.setColor(Color.yellow);
-	    g.drawString("Wort: "+new String(xyword),40,215);
-	    g.drawString("alpha: "+new String(probed),40,260);
-	    g.drawString("mist: "+mistakes,40,230);
-	}
+	g.setColor(Color.black);
+	g.fillRect(0,0,WND_B,WND_H);
+	g.setColor(Color.yellow);
+	g.drawString("Wort: "+new String(xyword),40,215);
+	if (mistakes!=-1) g.drawString("alpha: "+new String(probed),40,260);
+	if (mistakes!=-1) g.drawString("mist: "+mistakes,40,230);
 	UpdateHangMan(g);
     }
     
@@ -90,9 +88,9 @@ public class hangman extends Frame {
 	case 6:
 	    g.drawImage(tk.getImage("images/hm6.gif"),SX,SY,this);
 	    g.setColor(Color.red);
-	    g.drawString(">>> VERLOREN <<<",WND_B/2-100,WND_H/2);
+	    g.drawString(">>> VERLOREN <<<",WND_B/2-100,WND_H/2+10);
 	    g.setColor(Color.white);
-	    g.drawString("Das gesuchte Wort war '"+myword+"'!",WND_B/2-100,WND_H/2+15);
+	    g.drawString("Das gesuchte Wort war '"+myword+"'!",WND_B/2-100,WND_H/2+25);
 	    removeKeyListener(CONTROL);
 	    break;
 	case 5:
@@ -116,7 +114,7 @@ public class hangman extends Frame {
 	case -1:
 	    g.drawImage(tk.getImage("images/hm.gif"),SX,SY,this);
 	    g.setColor(Color.green);
-	    g.drawString(">>> GEWONNEN <<<",WND_B/2-100,WND_H/2);
+	    g.drawString(">>> GEWONNEN <<<",WND_B/2-100,WND_H/2+20);
 	    removeKeyListener(CONTROL);
 	    break;
 	}
@@ -145,7 +143,9 @@ public class hangman extends Frame {
 		}
 		if (xyword[i]=='_') underscores++;
 	    }
-	    if (!status && !check) mistakes++;
+	    if (!status && !check) {
+		mistakes++;
+	    }
 	    if (underscores==0) {
 		mistakes=-1;
 		System.out.println("Sie haben gewonnen!\n'"+myword+"' war richtig.");
