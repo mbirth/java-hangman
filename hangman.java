@@ -27,13 +27,13 @@ public class hangman extends Frame
     RandomAccessFile file;
     int maxdat=0;
     String words[];
-    String myword=null;
-    char xyword[];
+    String myword=null;  // Wort: was es mal werden soll
+    char xyword[];        // Wort: xy-ungelöst
     char probed[];
     char alphab[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
                     'O','P','Q','R','S','T','U','V','W','X','Y','Z',
 		    'Ä','Ö','Ü'};
-    int mistakes=0;
+    int mistakes=0;  // Anzahl Fehler (MIST!-akes)
     KL CONTROL;
     char c;
 
@@ -63,11 +63,11 @@ public class hangman extends Frame
 	CONTROL=new KL();
 	addKeyListener(CONTROL);
 	xyword=new char[myword.length()];
-	for (int i=1;i<myword.length();i++) {
+	for (int i=0;i<myword.length();i++) {
 	    xyword[i]='_';
 	}
 	probed=new char[29];
-	for (int i=1;i<29;i++) {
+	for (int i=0;i<29;i++) {
 	    probed[i]='-';
 	}
     }
@@ -78,34 +78,53 @@ public class hangman extends Frame
 	g.fillRect(0,0,WND_B,WND_H);
 	g.setColor(Color.yellow);
 	// g.drawString("Datensaetze: "+maxdat,40,350);
-	g.drawString("Wort: "+myword,40,220);
+	// g.drawString("Wort: "+myword,40,200);
 	// g.drawString("Zeichen: "+c,40,230);
-	g.drawString("Wort: "+new String(xyword),40,230);
-	g.drawString("alpha: "+new String(probed),40,250);
+	g.drawString("Wort: "+new String(xyword),40,215);
+	g.drawString("alpha: "+new String(probed),40,260);
+	g.drawString("mist: "+mistakes,40,230);
     }
     
 
     class KL implements KeyListener
     {
-	public void keyPressed(KeyEvent e) {}
-	public void keyReleased(KeyEvent e) {}
-	public void keyTyped(KeyEvent e)
-	{
-	    c=e.getKeyChar();
-	    c=java.lang.Character.toUpperCase(c);
-	    int i;
-	    for (i=0;i<29;i++) {
-		if (c==alphab[i]) {
-		    probed[i]=c;
+		public void keyPressed(KeyEvent e) {}
+		public void keyReleased(KeyEvent e) {}
+		public void keyTyped(KeyEvent e)
+		{
+	    	c=e.getKeyChar();
+		    c=Character.toUpperCase(c);
+		    int i;
+		    boolean status=false;
+		    boolean check=false;
+		    for (i=0;i<29;i++) {
+				if (c==alphab[i]) {
+			    	if (probed[i]!=c) probed[i]=c; else check=true;
+				}
+		    }
+		    int underscores=0;
+		    for (i=0;i<myword.length();i++) {
+				if (c==Character.toUpperCase(myword.charAt(i))) {
+			    	xyword[i]=myword.charAt(i);
+			    	status=true;
+				}
+				if (xyword[i]=='_') underscores++;
+		    }
+	   		if (!status && !check) { mistakes++; }
+		    if (underscores==0) {
+				myword="RICHTIG!";
+				repaint();
+				System.out.println("Sie haben gewonnen!");
+				System.exit(0);
+		    }
+		    if (mistakes>=6) {
+		    	myword="VERLOREN!";
+		    	repaint();
+		    	System.out.println("Schön, wie sie da am Galgen baumeln ...");
+		    	System.exit(0);
+		    }
+		    repaint();
 		}
-	    }
-	    for (i=0;i<myword.length();i++) {
-		if (c==java.lang.Character.toUpperCase(myword.charAt(i))) {
-		    xyword[i]=myword.charAt(i);
-		}
-	    }
-	    repaint();
-	}
     }
 
     public static void main(String args[])
