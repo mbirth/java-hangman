@@ -52,7 +52,7 @@ public class hangman extends Frame {
 	    while (wordseek==0) {    // Solange wordseek noch 0 ist, tue ...
 		wordseek=(int)(Math.random()*wordcount)+1;  // hol' Dir einen Integer-Wert
 	    }
-	    System.out.println("Ausgewaehltes Wort: #"+wordseek);  // Statusbericht
+	    System.out.print("Ausgewaehltes Wort: #"+wordseek);  // Statusbericht
 	    f.seek(0);      // Position auf Dateianfang setzen
 	    wordcount=0;    // Wieder auf NULL
 	    while ((stmp=f.readLine())!=null) {   // und das ganze wieder von vorn
@@ -158,14 +158,15 @@ public class hangman extends Frame {
 	    }
 	    if (!status && !check) mistakes++;  // wenn falscher Buchstabe und Buchst. nicht schonmal getippt: mistakes+1;
 	    if (!check) tries++;   // solange nicht doppelter Tip: tries+1;
-	    if (underscores==0) {   // wenn keine fehlenden Zeichen im Lösungswort ...
-		mistakes=-1;        // mistakes auf -1 und blabla ausgeben
-		System.out.println("Sie haben gewonnen!\n'"+myword+"' war richtig.");
+	    if (underscores==0 || mistakes>=6) {
+		System.out.println(" ("+myword+")");
+		System.out.println("Anzahl Versuche: "+tries+"    davon falsch: "+mistakes);
+		System.out.println("Getippte Buchstaben: "+new String(probed));
+		System.out.println("Anzahl versch. Buchstaben im Wort: "+(tries-mistakes));
+		System.out.println("Trefferquote: "+(((tries-mistakes)*100)/tries)+"%");
 	    }
-	    if (mistakes>=6) {      // wenn mehr als 5 Fehler ...
-		mistakes=6;          // Fehler=6 und blabla ausgeben
-		System.out.println("Schön, wie sie da am Galgen baumeln ...\nWieso sind Sie auch nicht auf '"+myword+"' gekommen?");
-	    }
+	    if (underscores==0) mistakes=-1;   // wenn keine fehlenden Zeichen im Lösungswort ...
+	    if (mistakes>=6) mistakes=6;       // wenn mehr als 5 Fehler ...
 	    repaint();        // Grafikfenster neuzeichnen
 	}
     }
