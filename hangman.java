@@ -26,6 +26,7 @@ public class hangman extends Frame {
     final int SX=50, SY=50;
     RandomAccessFile file;
     String myword=null;  // Wort: was es mal werden soll
+    String topic=null;   // String für das Thema des Begriffes
     char xyword[];        // Wort: xy-ungelöst
     char probed[];
     char notprobed[];
@@ -64,7 +65,10 @@ public class hangman extends Frame {
 		if (stmp.charAt(0) != '#') {
 		    wordcount++;
 		    if (wordcount==wordseek) {     // wenn an Position, die wir suchen ...
-			myword=stmp;               // setze myword auf gerade gelesenen String
+			if (stmp.indexOf(": ")!=-1) {
+			    topic=stmp.substring(0,stmp.indexOf(": "));
+			    myword=stmp.substring(stmp.indexOf(": ")+2,stmp.length());
+			} else myword=stmp;
 			break;                    // und raus hier!
 		    }
 		}
@@ -96,8 +100,11 @@ public class hangman extends Frame {
 	// g.drawString("Zeichen: "+c,40,230);
 	g.setColor(Color.black);           // Farbe auf SCHWARZ
 	g.fillRect(0,0,WND_B,WND_H);       // Fenster schön SCHWARZ machen!
-	g.setColor(Color.yellow);          // und Farbe auf GELB setzen
+	g.setColor(Color.white);          // und Farbe auf GELB setzen
 	g.drawString("Wort: "+new String(xyword),40,215);
+	g.setColor(Color.red);
+	if (topic!=null) g.drawString("Thema: "+topic,40,40);
+	g.setColor(Color.yellow);
 	if (mistakes!=-1) {
 	    g.drawString("Buchstaben: ",40,260);
 	    for (int i=0;i<alphab.length;i++) {
