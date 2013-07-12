@@ -1,0 +1,65 @@
+HangMan for Java 1.9 [08.12.1998]
+(c)1998-99 bei Markus Birth <Robo.Cop@gmx.net>
+================================================================================
+
+Dieses ist meine eigens programmierte Hangman-Version für Java. Das Programm
+liegt im Quelltext und als vorkompilierte CLASS-Datei vor. Es verwendet die
+System.events des Java 1.1 und läuft somit also nicht auf älteren Versionen.
+
+Um es auszuführen, einfach folgendes am Prompt eingeben (sofern ein Java-
+Development-Kit der Version 1.1.? korrekt installiert wurde):
+
+  JAVA hangman
+  
+Danach sollte Hangman starten und Sie können loslegen ;-).
+
+Die Spielregeln sind ganz einfach: Sie müssen das Wort durch eingeben einzelner
+Buchstaben vervollständigen. Dabei dürfen Sie 5 Mal falsch tippen.
+
+Die zu erratenen Wörter werden aus der Datei HANGMAN.DAT gelesen. Sie können
+Sie beliebig erweitern - müssen allerdings die Hinweise beachten, die in der
+o.g. Datei stehen.
+
+Das soll's auch schon gewesen sein - ich finde, mehr gibt es zu Hangman nicht
+zu sagen =).
+
+Viel Spaß mit diesem Programm!
+
+================================================================================
+
+HISTORY
+-------
+
+
+1.9 [08.12.1998/19:29.52]
+-mehr Statistik am Programmende
+
+1.8 [08.12.1998/19:05.35]
+-Wörterwahl-Routine verbessert - jetzt ist unbegrenzte Zahl an Wörtern in
+ der Datendatei möglich
+-mehrere Kommentare hinzugefügt
+
+1.7 [03.12.1998/20:18.42]
+-Vor-Version ... sozusagen erste BETA
+
+1.6 [03.12.1998/19:45.14]
+-Grafiken eingefügt
+
+1.5 [02.12.1998/15:42.09]
+-Fehlererkennung verbessert
+-kleinere Bugs mit Windows-Java beseitigt
+
+1.4 [01.12.1998/19:34.33]
+-Anzeige der Vorkommnisse der Buchstaben im Wort
+
+1.3 [01.12.1998/19:12.21]
+-Eingegebene Buchstaben werden jetzt in Großb. konvertiert
+-außerdem: einige Kommentare hinzugefügt
+
+1.2 [01.12.1998/18:19.40]
+-Tastatureingabe mit Anzeige schon gedrückter Tasten hinzugefügt
+
+1.1 [01.12.1998/17:52.38]
+-Ursprungsversion: erster Versuch
+
+================================================================================

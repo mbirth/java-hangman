@@ -1,0 +1,139 @@
+#      ## ##  ###  #   #  #### #   #  ###  #   #    ####   ###  #####
+#      ## ## ## ## ##  # ##    ## ## ## ## ##  #    ## ## ## ##   #
+#      ##### ##### # # # ## ## # # # ##### # # #    ## ## #####   #
+#      ## ## ## ## #  ## ## ## # # # ## ## #  ## ## ## ## ## ##   #
+#      ## ## ## ## #   #  #### #   # ## ## #   # ## ####  ## ##   #
+#
+#############################################################################
+# Hier stehen die Wörter, die erraten werden sollen können untereinander    #
+# Jede Zeile, die mit einer Raute (#) beginnt, gilt als Kommentar           #
+# WICHTIG: Hinter dem letzten Wort sollte mindestens ein LF (LineFeed) sein #
+#          und es dürfen keine Leerzeilen in dieser Datei stehen            #
+#                                                                           #
+# Format der Einträge:  Thema: Wort                                         #
+# Beispiel:             Auto: Lenkrad                                       #
+#                                                                           #
+#     Es ist wichtig, daß hinter dem Doppelpunkt ein Leerzeichen ist!!      #
+#############################################################################
+die Sinne des Menschen: Blödsinn
+die Sinne des Menschen: Stumpfsinn
+# Hier ist z.B. ein Kommentar
+die Sinne des Menschen: Wahnsinn
+# Und hier noch einer!
+Linguistik: Wort
+Fremdwort: Extension
+Regierungsform: Diktatur
+Fremdwort: Korrespondenz
+Fremdwort: Interaktion
+Fremdwort: Bilabidarekorrelationsdivergenz
+Pflanze: Rose
+Pflanze: Blume
+Computer: Thermotransferdrucker
+Krankheit: Hyperventilation
+Büroalltag: Kaffeetasse
+Getränkezeugs: Teebeutel
+DJ-Zubehör: Mischpult
+Schule: Lehrerkonferenz
+Schule: Stundenplan
+Schule: Kursfahrt
+Computer: Computer
+Heimelektronik: Radioapparat
+Kommunikation: Telefon
+Kommunikation: Handy
+Spiel: Sackhüpfen
+Fremdwort: Subliminationsverfahren
+Computer: Linux
+Naturereignis: Sonnenfinsternis
+Naturereignis: Mondfinsternis
+Büroalltag: Kaffeeklatsch
+Auto: Volkswagen
+Heimelektronik: Satellitenempfangsanlage
+Heimelektronik: Kassettenrekorder
+Arbeitsgerät: Schreibtisch
+Arbeitsgerätezubehör: Schreibtischunterlage
+Computer: Tastatur
+Computer: Maus
+Computer: Monitor
+Heimelektronik: Fernseher
+Heimelektronik: Antenne
+Computer: Diskette
+Computer: Microsoft
+Tier: Hase
+Tier: Rentier
+Gerücht: Weihnachtsmann
+Fest: Weihnachtsmarkt
+Fest: Weihnachtsmarktschreier
+Fest: Weihnachtsmarktschreierin
+Computer: Fünfeinviertelzolldiskette
+Computer: Dreieinhalbzolldiskette
+Computer: Notebook
+Fremdwort: Bibliographie
+Schriftart: Calligraphie
+Regierungsform: Aristokratie
+Fremdwörterlexikon: Duden
+Heimelektronik: Radiowecker
+nützliche Erfindung: Alarmanlage
+Naturereignis: Schneefall
+Ort: Nordpol
+Ort: Südpol
+Ring um die Erde: Äquator
+Laster: Telefongebühren
+nützliche Erfindung: Notizzettel
+nützliche Erfindung: Papierzettel
+Zellstoffprodukt: Papierblock
+nützliche Erfindung: Hefter
+nützliche Erfindung: Klammeraffe
+Tier: Pawian
+Tier: Schimpanse
+Tier: Giraffe
+Pflanze: Venusfliegenfalle
+Computer: Hardwareproblem
+Computer: Computerfehler
+nützliche Erfindung: Tischdecke
+Akkustikübertrager: Lautsprecher
+Fernsehen: Liveübertragung
+Naturereignis: Eisglätte
+öffentliche Einrichtung: Restaurant
+Heimelektronik: Funkuhr
+nützliche Erfindung: Tischlampe
+Licht: Deckenbeleuchtung
+nützliche Erfindung: Türschloß
+Auto: Karosserie
+Landwirtschaft: Mistgabel
+Landwirtschaft: Heuhaufen
+Landwirtschaft: Pferdeapfel
+Landwirtschaft: Pferdestall
+Kinderspass: Kinderschaukel
+ist meist offen: Hosenstall
+nützliche Erfindung: Reißverschluß
+Computer: Laserdrucker
+Flugzeug: Hubschrauber
+Flugzeug: Helicopter
+Tonträger: Langspielplatte
+Tonträger: Musikkassette
+Ort: Toilette
+Ort: Schwarzwald
+Ort: Liechtenstein
+Ort: Nowosibirsk
+Fahrzeug: UFO
+Redewendung abgekürzt: UPG
+Alltagsbedarf: Armbanduhr
+KFZ: Motorblock
+KFZ: Karosserie
+KFZ: Krause
+Pflanze: Fettkraut
+Pflanze: Liane
+Pflanze: Gras
+Kinderfreude: Überraschungsei
+Elektronik: Laserdiode
+Unterhaltung: Dartscheibe
+Horror / Angst: Beierlein
+Horror / Angst: Vampir
+Horror / Angst: Verkehrsunfall
+KFZ: Stau
+Horror / Angst: Atomunfall
+Horror / Angst: GAU
+Computer: DAU
+Computer: Festplattencrash
+eklig: MatthiasKlein
+Tier: Grizzlybär
